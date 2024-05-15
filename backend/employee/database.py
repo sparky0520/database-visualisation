@@ -14,7 +14,7 @@ def add(data):
     con = connect_to_database()
     name = data.get('name')
     position = data.get('position')
-    salary = data.get('salary')
+    salary = int(data.get('salary'))
     if con:
         try:
             cur = con.cursor(dictionary=True)
@@ -28,18 +28,24 @@ def add(data):
             con.close()
     else:
         return {'success': False, 'message': "Error connecting to database"}
-
+    
 def delete(data):
     con = connect_to_database()
     name = data.get('name')
     position = data.get('position')
-    salary = data.get('salary')
-    employee_id = data.get('employee_id')
+    salary = int(data.get('salary'))
+    employee_id = int(data.get('employee_id'))
     if con:
         try:
             cur = con.cursor(dictionary=True)
+            # Checking if employee_id exists
+            cur.execute("select * from employees where employee_id={}".format(employee_id))
+            if not cur.fetchall():
+                return {'success': False, 'message': f"No Employee with employee_id={employee_id}"}
+            
             cur.execute("delete from employees where employee_id={} and name='{}' and position='{}' and salary={};".format(employee_id,name,position,salary))
             con.commit()
+            
             return {'success': True, 'message': "Employee Deleted Successfully"}
         except sqlcon.Error as e:
             return {'success': False, 'message': "Error deleting employee: {}".format(e)}
@@ -53,11 +59,15 @@ def update(data):
     con = connect_to_database()
     name = data.get('name')
     position = data.get('position')
-    salary = data.get('salary')
-    employee_id = data.get('employee_id')
+    salary = int(data.get('salary'))
+    employee_id = int(data.get('employee_id'))
     if con:
         try:
             cur = con.cursor(dictionary=True)
+            # Checking if employee_id exists
+            cur.execute("select * from employees where employee_id={}".format(employee_id))
+            if not cur.fetchall():
+                return {'success': False, 'message': f"No Employee with employee_id={employee_id}"}
             cur.execute("update employees set name='{}',position='{}',salary={} where employee_id={};".format(name,position,salary,employee_id))
             con.commit()
             return {'success': True, 'message': "Employee Updated Successfully"}
@@ -74,19 +84,28 @@ def view(data):
     if con:
         try:
             cur = con.cursor(dictionary=True)
-            command = "SELECT * FROM employees;"
+            command = "SELECT * FROM employees"
+            
             name = data.get('name')
             salary = data.get('salary') 
             
+            # pagination
+            page = int(data.get('page', 1))  # Default to page 1 if not provided
+            page_size = int(data.get('page_size', 10))  # Default page size to 10 if not provided
+            
+            # Calculate the starting index based on the page number and page size
+            start_index = (page - 1) * page_size
+
             if name and salary:
-                command = f"SELECT * FROM employees WHERE name LIKE '%{name}%' AND salary LIKE '%{salary}%';"
-                
+                command += f" WHERE name LIKE '%{name}%' AND salary LIKE '%{salary}%'"
             elif name:
-                command = f"SELECT * FROM employees WHERE name LIKE '%{name}%';"
-                
+                command += f" WHERE name LIKE '%{name}%'"
             elif salary:
-                command = f"SELECT * FROM employees WHERE salary LIKE '%{salary}%';"
-    
+                command += f" WHERE salary LIKE '%{salary}%'"
+            
+            # Add pagination to the SQL query
+            command += f" LIMIT {start_index}, {page_size};"
+            
             cur.execute(command)
             rows = cur.fetchall()
             if rows:

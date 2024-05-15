@@ -12,8 +12,9 @@
 - View Records: Clicking on "View Database" we can see all the records in a neatly aligned table in a new page. In this new page we can filter records by name or salary of the employee. All the records with data like the filter will appear in the table.
 
 
-
-
 # Backend - Flask App
 The backend server comprises of a flask script, blueprint file and database code file all of which are written in Python.
 
+## database.py
+
+Contains a SQL table 

@@ -2,7 +2,8 @@ from flask import Flask,request,jsonify,Blueprint
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+# Enable CORS and handle preflight requests
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 from employee.routes import employee_bp
 app.register_blueprint(employee_bp)
