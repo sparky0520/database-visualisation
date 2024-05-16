@@ -54,7 +54,6 @@ const Listing = () => {
             onChange={(e) => { setSalary(e.target.value) }}
           />
         </div>
-        <button className='text-lg border-2 border-blue-500 text-blue-500 p-1 rounded-md'>Search</button>
       </div>
       {isLoading ? (<Spinner />) : ""}
       <Table data={totalData} />

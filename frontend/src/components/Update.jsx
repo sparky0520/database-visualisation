@@ -26,6 +26,7 @@ const Update = () => {
             .put(`http://localhost:5000/employee/${employee_id}`, data)
             .then(() => {
                 clearInput()
+                console.log("Updated!")
                 enqueueSnackbar("Employee Updated Successfully", { variant: 'success' })
             })
             .catch(err => {

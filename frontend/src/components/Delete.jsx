@@ -15,6 +15,7 @@ const Delete = () => {
             .delete(`http://localhost:5000/employee/${employee_id}`)
             .then(() => {
                 clearInput()
+                console.log("Deleted!")
                 enqueueSnackbar("Employee Deleted Successfully", { variant: 'success' })
             })
             .catch(err => {
