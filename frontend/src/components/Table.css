@@ -1,0 +1,11 @@
+tr:nth-child(even) {
+    background-color: #D6EEEE;
+}
+
+tr:hover {
+    background-color: #D6EEEE;
+}
+
+th{
+    margin: 0.5rem 1rem;
+}

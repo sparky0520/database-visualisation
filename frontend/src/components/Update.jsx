@@ -18,13 +18,12 @@ const Update = () => {
 
     const handleUpdateEmployee = () => {
         const data = {
-            employee_id,
-            name,
-            position,
-            salary,
+            "name":name,
+            "position":position,
+            "salary":salary
         }
         axios
-            .put('http://localhost:5000/employee', data)
+            .put(`http://localhost:5000/employee/${employee_id}`, data)
             .then(() => {
                 clearInput()
                 enqueueSnackbar("Employee Updated Successfully", { variant: 'success' })
