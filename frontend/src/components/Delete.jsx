@@ -4,27 +4,15 @@ import { useSnackbar } from 'notistack'
 
 const Delete = () => {
     const [employee_id, setEmployee_id] = useState('')
-    const [name, setName] = useState('')
-    const [position, setPosition] = useState('')
-    const [salary, setSalary] = useState('')
     const { enqueueSnackbar } = useSnackbar()
 
     const clearInput = () => {
         setEmployee_id('')
-        setName('')
-        setPosition('')
-        setSalary('')
     }
 
     const handleDeleteEmployee = () => {
-        const data = {
-            "employee_id":employee_id,
-            "name":name,
-            "position":position,
-            "salary":salary,
-        }
         axios
-            .delete('http://localhost:5000/employee', data)
+            .delete(`http://localhost:5000/employee/${employee_id}`)
             .then(() => {
                 clearInput()
                 enqueueSnackbar("Employee Deleted Successfully", { variant: 'success' })
@@ -46,30 +34,6 @@ const Delete = () => {
                         type='text'
                         value={employee_id}
                         onChange={(e) => { setEmployee_id(e.target.value) }} />
-                </div>
-                <div className='my-2'>
-                    <label className='text-xl mr-4'>Name</label>
-                    <input
-                        className='border-2'
-                        type='text'
-                        value={name}
-                        onChange={(e) => { setName(e.target.value) }} />
-                </div>
-                <div className='my-2'>
-                    <label className='text-xl mr-4'>Position</label>
-                    <input
-                        className='border-2'
-                        type='text'
-                        value={position}
-                        onChange={(e) => { setPosition(e.target.value) }} />
-                </div>
-                <div className='my-2'>
-                    <label className='text-xl mr-4'>Salary</label>
-                    <input
-                        className='border-2'
-                        type='text'
-                        value={salary}
-                        onChange={(e) => { setSalary(e.target.value) }} />
                 </div>
                 <div className='flex justify-between mt-4'>
                     <button className='text-lg border-2 border-red-500 text-red-500 p-1 rounded-md' onClick={clearInput}>Cancel</button>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useSnackbar } from 'notistack'
+//import { useSnackbar } from 'notistack'
 
 const Add = () => {
     const [name, setName] = useState('')
     const [position, setPosition] = useState('')
     const [salary, setSalary] = useState('')
-    const { enqueueSnackbar } = useSnackbar()
+    //const { enqueueSnackbar } = useSnackbar()
 
     const clearInput = () => {
         setName('')
@@ -24,10 +24,10 @@ const Add = () => {
             .post('http://127.0.0.1:5000/employee', data)
             .then(() => {
                 clearInput()
-                enqueueSnackbar("Employee Created Successfully", { variant: 'success' })
+                //enqueueSnackbar("Employee Created Successfully", { variant: 'success' })
             })
             .catch(err => {
-                enqueueSnackbar('An error occured posting data. Please check console.', { variant: 'error' })
+                //enqueueSnackbar('An error occured posting data. Please check console.', { variant: 'error' })
                 console.log(err)
             })
     }

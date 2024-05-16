@@ -29,12 +29,8 @@ def add(data):
     else:
         return {'success': False, 'message': "Error connecting to database"}
     
-def delete(data):
+def delete(employee_id):
     con = connect_to_database()
-    name = data.get('name')
-    position = data.get('position')
-    salary = int(data.get('salary'))
-    employee_id = int(data.get('employee_id'))
     if con:
         try:
             cur = con.cursor(dictionary=True)
@@ -43,7 +39,7 @@ def delete(data):
             if not cur.fetchall():
                 return {'success': False, 'message': f"No Employee with employee_id={employee_id}"}
             
-            cur.execute("delete from employees where employee_id={} and name='{}' and position='{}' and salary={};".format(employee_id,name,position,salary))
+            cur.execute("delete from employees where employee_id={};".format(employee_id))
             con.commit()
             
             return {'success': True, 'message': "Employee Deleted Successfully"}
