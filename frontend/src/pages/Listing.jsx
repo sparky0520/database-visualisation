@@ -32,13 +32,15 @@ const Listing = () => {
         <div className="text-3xl mx-auto my-6">Employees table</div>
       </div>
       <div className="flex justify-start">
-        <Link to="/" className="text-lg border-2 border-gray-500 p-2 rounded-md">Back</Link>
+        <Link to="/" className="text-lg border-2 border-gray-500 p-2 rounded-md hover:bg-gray-500 hover:text-white transition duration-400 ease-in-out">Back</Link>
       </div>
       <div className='flex justify-around'>
         <div className='text-lg ml-10'>Filter By: </div>
         <div>
-          <label className='text-xl mr-4'>Name</label>
+          <label htmlFor="name" className='text-xl mr-4'>Name</label>
           <input
+            id='name'
+            name="name"
             className='border-2'
             type='text'
             value={name}
@@ -46,8 +48,10 @@ const Listing = () => {
           />
         </div>
         <div>
-          <label className='text-xl mr-4'>Salary</label>
+          <label htmlFor='salary' className='text-xl mr-4'>Salary</label>
           <input
+            name='salary'
+            id='salary'
             className='border-2'
             type='text'
             value={salary}

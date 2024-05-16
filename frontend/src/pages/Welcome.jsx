@@ -11,7 +11,7 @@ const Welcome = () => {
                 <div className="text-3xl mx-auto my-6">Welcome Admin</div>
             </div>
             <div className="flex justify-end">
-                <Link to="/listing" className="text-lg border-2 border-gray-500 p-2 rounded-md">View Database</Link>
+                <Link to="/listing" className="text-lg border-2 border-gray-500 p-2 rounded-md hover:bg-gray-500 hover:text-white transition duration-400 ease-in-out">View Database</Link>
             </div>
             <div className='flex justify-between items-top my-20'>
                 <Add/>

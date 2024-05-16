@@ -37,8 +37,8 @@ const Delete = () => {
                         onChange={(e) => { setEmployee_id(e.target.value) }} />
                 </div>
                 <div className='flex justify-between mt-4'>
-                    <button className='text-lg border-2 border-red-500 text-red-500 p-1 rounded-md' onClick={clearInput}>Cancel</button>
-                    <button className='text-lg border-2 border-blue-500 text-blue-500 p-1 rounded-md' onClick={handleDeleteEmployee}>Delete</button>
+                    <button className='text-lg border-2 border-red-500 text-red-500 p-1 rounded-md hover:bg-red-500 hover:text-white transition duration-400 ease-in-out' onClick={clearInput}>Cancel</button>
+                    <button className='text-lg border-2 border-blue-500 text-blue-500 p-1 rounded-md hover:bg-blue-500 hover:text-white transition duration-400 ease-in-out' onClick={handleDeleteEmployee}>Delete</button>
                 </div>
             </div>
         </div>
