@@ -1,6 +1,6 @@
 # Database Visualisation using React/Flask
 
-### Through this full stack application the admin will be able to manage a database (MySQL) and perform the following tasks:
+### Through this full stack application the admin will be able to manage a database (SQLite) and perform the following tasks:
 
 
 - Add Employee: Adding name, position, salary. A unique id is automatically generated with every next id being an increment of the previous.
